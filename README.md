@@ -9,9 +9,9 @@
 
 Include the file found in the `dist` directory.
 
-When creating your main angular module, include `vokal.majora` in the list of included modules, e.g.
+When creating your main angular module, include `vokal.RouteAuth` in the list of included modules, e.g.
 ```js
-angular.module( "myApp", [ "vokal.majora" ] );
+angular.module( "myApp", [ "vokal.RouteAuth" ] );
 ```
 
 Add a resolve to a route like so:
@@ -131,7 +131,7 @@ Returns a promise, which is resolved if the user has one of the `allowedRoles`. 
 ##### Arguments
 
 1. `allowedRoles` | *Array*  | list of acceptable roles
-2. `options`      | *Object* | optional options for this function 
+2. `options`      | *Object* | optional parameters for this function 
   * `redirectPath` | *String* | path to redirect to should the user not have one of the allowed roles
 
 ##### Returns
