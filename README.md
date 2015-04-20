@@ -145,7 +145,7 @@ $routeProvider.when( "/edit-account", { templateUrl: partialPath( "edit-account.
 	resolve: { 
 		auth: [ "RouteAuth", function ( RouteAuth )
 		{
-			return RouteAuth.auth( [ "user" ] );
+			return RouteAuth.auth( [ "user" ], { "redirectPath": "/login" } );
 		} ]
 	} 
 } );
