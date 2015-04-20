@@ -1,0 +1,33 @@
+{
+  "name": "route-auth",
+  "version": "1.0.0",
+  "description": "Easy to use route authorization provider",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vokal/route-auth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vokal/route-auth/issues"
+  },
+  "homepage": "https://github.com/vokal/route-auth",
+  "scripts": {
+    "webdriver-update": "node ./node_modules/protractor/bin/webdriver-manager update",
+    "karma-test": "node ./node_modules/karma/bin/karma start karma-config",
+    "test": "grunt && npm run karma-test"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "dependencies": {
+    "codecov.io": "0.0.8",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-istanbul": "^0.3.0",
+    "grunt-contrib-uglify": "^0.5.0",
+    "jasmine-reporters": "~1.0.0",
+    "karma": "^0.12.24",
+    "karma-coverage": "~0.2.7",
+    "karma-jasmine": "~0.2.0",
+    "load-grunt-config": "^0.13.1"
+  }
+}
