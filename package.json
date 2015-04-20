@@ -1,5 +1,6 @@
 {
   "name": "route-auth",
+  "version": "1.0.0",
   "description": "Easy to use route authorization provider",
   "repository": {
     "type": "git",
