@@ -132,7 +132,7 @@ Returns a promise, which is resolved if the user has one of the `allowedRoles`. 
 
 1. `allowedRoles` | *Array*  | list of acceptable roles
 2. `options`      | *Object* | optional options for this function 
-..* `redirectPath` | *String* | path to redirect to should the user not have one of the allowed roles
+  * `redirectPath` | *String* | path to redirect to should the user not have one of the allowed roles
 
 ##### Returns
 
