@@ -15,9 +15,12 @@ module.exports = function ( config )
         logLevel: config.LOG_DEBUG,
         plugins: [
             "karma-jasmine",
+            "karma-phantomjs-launcher",
             "karma-coverage"
         ],
-        preprocessors: {},
+        preprocessors: {
+            "../source/route_auth.js": [ "coverage" ]
+        },
         coverageReporter: {
             dir : "coverage/karma/",
             subdir: ".",
@@ -26,14 +29,14 @@ module.exports = function ( config )
             ]
         },
         files: [
-            "source/components/angular/angular.js",
-            "source/components/angular-mocks/angular-mocks.js",
-            "source/components/angular-local-storage/dist/angular-local-storage.js",
-            "directives/**/*.js",
-            "services/**/*.js",
-            "spec/**/*.js"
+            "../source/components/angular/angular.js",
+            "../source/components/angular-mocks/angular-mocks.js",
+            "../source/components/angular-local-storage/dist/angular-local-storage.js",
+            "../source/route_auth.js",
+            "*.spec.js"
         ]
 
     } );
 
 };
+
