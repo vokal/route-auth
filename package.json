@@ -1,6 +1,6 @@
 {
   "name": "route-auth",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/route-auth.js",
   "description": "Easy to use route authorization provider",
   "repository": {
