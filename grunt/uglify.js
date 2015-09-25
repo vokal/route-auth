@@ -3,7 +3,7 @@ module.exports = {
 	{
 		mangle: true,
 		compress: {},
-		banner: "/*! <%= pkg.name %> <%= grunt.template.today( 'yyyy-mm-dd' ) %> */",
+		banner: "/*! <%= pkg.name %> <%= grunt.template.today( 'yyyy-mm-dd' ) %> */\n",
 		sourceMap: false
 	},
 	project:
@@ -11,7 +11,7 @@ module.exports = {
 		files:
 		{
 			"dist/<%= pkg.name %>.min.js": [
-				"source/*.js"
+				"dist/<%= pkg.name %>.js"
 			]
 		}
 	}
