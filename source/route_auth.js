@@ -27,6 +27,14 @@ angular.module( "vokal.RouteAuth", [ "LocalStorageModule" ] )
                     roles = newRoles;
                     localStorageService.set( "user:roles", newRoles );
                 },
+                addRole: function ( newRole )
+                {
+                    if( !service.hasRoles( [ newRole ] ) )
+                    {
+                        roles.push( newRole );
+                        localStorageService.set( "user:roles", roles );
+                    }
+                },
                 hasRoles: function ( checkRoles )
                 {
                     var allow = false;

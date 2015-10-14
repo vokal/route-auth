@@ -35,6 +35,15 @@ describe( "RouteAuth Provider", function ()
         expect( RouteAuth.hasRoles( [ "user" ] ) ).toBe( true );
     } );
 
+    it( "should allow the adding of a role to the existing set", function ()
+    {
+        RouteAuth.storeRoles( [ "user" ] );
+        RouteAuth.addRole( "admin" );
+
+        expect( RouteAuth.hasRoles( [ "user" ] ) ).toBe( true );
+        expect( RouteAuth.hasRoles( [ "admin" ] ) ).toBe( true );
+    } );
+
     it( "should resolve promise when has roles", function ()
     {
         RouteAuth.storeRoles( [ "user" ] );

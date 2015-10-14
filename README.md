@@ -16,12 +16,12 @@ angular.module( "myApp", [ "vokal.RouteAuth" ] );
 
 Add a resolve to a route like so:
 $routeProvider.when( "/edit-account", { templateUrl: partialPath( "edit-account.html" ),
-	resolve: { 
+	resolve: {
 		auth: [ "RouteAuth", function ( RouteAuth )
 		{
 			return RouteAuth.auth( [ "user" ] );
 		} ]
-	} 
+	}
 } );
 
 The array of strings passed to RouteAuth.auth are the permissions that are allowable for the route
@@ -38,10 +38,11 @@ route authorization does not replace in any way authorization on the server side
 
 The following methods can be called on the `RouteAuth` service once injected into your Angular code.
 
-* [loadRoles( )](#method-loadRoles)
+* [loadRoles()](#method-loadRoles)
 * [storeRoles( newRoles )](#method-storeRoles)
+* [addRole( newRole )](#method-addRole)
 * [hasRoles( checkRoles )](#method-hasRoles)
-* [hasNoRoles(  )](#method-hasNoRoles)
+* [hasNoRoles()](#method-hasNoRoles)
 * [auth( allowedRoles, options )](#method-auth)
 
 ### Methods
@@ -64,6 +65,22 @@ Overwrite the user's current roles with `newRoles`
 
 ```js
 RouteAuth.storeRoles( [ 'user', 'premiumUser', 'purpleDiamondUltraEliteClass' ] );
+```
+
+* * *
+
+#### <a name="method-addRole"></a>`addRole( newRole )`
+
+Add `newRole` to the existing set of roles
+
+##### Arguments
+
+1. `newRole` | *String* | the new user role to add
+
+##### Example
+
+```js
+RouteAuth.addRole( 'admin' );
 ```
 
 * * *
@@ -127,11 +144,11 @@ function adjustAdLevel()
 #### <a name="method-auth"></a>`auth( allowedRoles, options )`
 
 Returns a promise, which is resolved if the user has one of the `allowedRoles`. Otherwise, the promise is rejected.
- 
+
 ##### Arguments
 
 1. `allowedRoles` | *Array*  | list of acceptable roles
-2. `options`      | *Object* | optional parameters for this function 
+2. `options`      | *Object* | optional parameters for this function
   * `redirectPath` | *String* | path to redirect to should the user not have one of the allowed roles
 
 ##### Returns
@@ -142,12 +159,12 @@ Returns a promise, which is resolved if the user has one of the `allowedRoles`. 
 
 ```js
 $routeProvider.when( "/edit-account", { templateUrl: partialPath( "edit-account.html" ),
-	resolve: { 
+	resolve: {
 		auth: [ "RouteAuth", function ( RouteAuth )
 		{
 			return RouteAuth.auth( [ "user" ], { "redirectPath": "/login" } );
 		} ]
-	} 
+	}
 } );
 ```
 
