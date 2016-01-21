@@ -1,4 +1,19 @@
 {
+    "disallowSpaceAfterKeywords": [
+        "do",
+        "for",
+        "if",
+        "else",
+        "switch",
+        "case",
+        "try",
+        "catch",
+        "finally",
+        "void",
+        "while",
+        "with",
+        "typeof"
+    ],
     "disallowSpaceAfterPrefixUnaryOperators": true,
     "disallowSpaceBeforePostfixUnaryOperators": true,
     "disallowSpaceBeforeComma": true,
@@ -13,7 +28,15 @@
     "disallowTrailingWhitespace": true,
     "maximumLineLength": 120,
     "requireCommaBeforeLineBreak": true,
-    "requireCurlyBraces": true,
+    "requireCurlyBraces": [
+        "if",
+        "else",
+        "for",
+        "while",
+        "do",
+        "try",
+        "catch"
+    ],
     "requireDotNotation": {
         "allExcept": [ "snake_case", "keywords" ]
     },
@@ -33,12 +56,9 @@
         "beforeOpeningRoundBrace": true
     },
     "requireSpacesInConditionalExpression": true,
-    "requireSpacesInsideBrackets": {
-        "allExcept": [ "(", ")", "{", "}", "[", "]", "function" ]
-    },
+    "requireSpacesInsideBrackets": true,
     "requireSpacesInsideParentheses": {
-        "all": true,
-        "except": [ "(", ")", "{", "}", "[", "]", "function" ]
+        "all": true
     },
     "requireSemicolons": true,
     "validateParameterSeparator": ", ",
