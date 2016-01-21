@@ -26,6 +26,7 @@
     "grunt-istanbul": "^0.3.0",
     "jasmine-reporters": "~1.0.0",
     "karma": "^0.12.24",
+    "karma-browserify": "^4.4.2",
     "karma-coverage": "~0.2.7",
     "karma-jasmine": "~0.2.0",
     "karma-phantomjs-launcher": "^0.2.1",
