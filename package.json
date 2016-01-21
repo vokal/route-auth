@@ -1,7 +1,7 @@
 {
   "name": "route-auth",
   "version": "2.0.0",
-  "main": "dist/route-auth.js",
+  "main": "source/route_auth.js",
   "description": "Easy to use route authorization provider",
   "repository": {
     "type": "git",
