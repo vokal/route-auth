@@ -1,12 +1,13 @@
+"use strict";
+
+var istanbul = require( "browserify-istanbul" );
 
 module.exports = function ( config )
 {
-    "use strict";
-
     config.set( {
 
         basePath:   ".",
-        frameworks: [ "jasmine" ],
+        frameworks: [ "browserify", "jasmine" ],
         autoWatch:  false,
         browsers:   [ "PhantomJS" ],
         reporters:  [ "dots", "coverage" ],
@@ -16,10 +17,11 @@ module.exports = function ( config )
         plugins: [
             "karma-jasmine",
             "karma-phantomjs-launcher",
-            "karma-coverage"
+            "karma-coverage",
+            "karma-browserify"
         ],
         preprocessors: {
-            "../source/route_auth.js": [ "coverage" ]
+            "./harness.js": [ "browserify" ]
         },
         coverageReporter: {
             dir : "coverage/karma/",
@@ -28,15 +30,15 @@ module.exports = function ( config )
                 { type: "lcov" }
             ]
         },
+        browserify: {
+            debug: true,
+            transform: [ istanbul({}) ]
+        },
         files: [
-            "../source/components/angular/angular.js",
-            "../source/components/angular-mocks/angular-mocks.js",
-            "../source/components/angular-local-storage/dist/angular-local-storage.js",
-            "../source/route_auth.js",
-            "*.spec.js"
+            "*.spec.js",
+            "./harness.js"
         ]
 
     } );
 
 };
-

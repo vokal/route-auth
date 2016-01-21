@@ -1,6 +1,15 @@
+"use strict";
+
 module.exports = function ( grunt )
 {
-    "use strict";
+    grunt.initConfig( {
+        clean: {
+            coverage: [ "coverage/" ],
+            dist: [ "dist/" ]
+        }
+    } );
 
-    require( "load-grunt-config" )( grunt );
+    grunt.loadNpmTasks( "grunt-contrib-clean" );
+
+    grunt.registerTask( "default", [ "clean" ] );
 };

@@ -1,9 +1,9 @@
-angular.module( "vokal.RouteAuth", [ "LocalStorageModule" ] )
+"use strict";
+
+angular.module( "vokal.RouteAuth", [] )
 
 .provider( "RouteAuth", function ()
 {
-    "use strict";
-
     var roles        = null;
     var redirectPath = "/sign-in";
 
@@ -12,27 +12,27 @@ angular.module( "vokal.RouteAuth", [ "LocalStorageModule" ] )
         redirectPath = path;
     };
 
-    this.$get = [ "$q", "$location", "$rootScope", "localStorageService",
+    this.$get = [ "$q", "$location", "$rootScope",
 
-        function ( $q, $location, $rootScope, localStorageService )
+        function ( $q, $location, $rootScope )
         {
             var service = {
-
+                storageType: localStorage,
                 loadRoles: function ()
                 {
-                    roles = localStorageService.get( "user:roles" ) || [];
+                    roles = service.storageType.getItem( "user:roles" ) || [];
                 },
                 storeRoles: function ( newRoles )
                 {
                     roles = newRoles;
-                    localStorageService.set( "user:roles", newRoles );
+                    service.storageType.setItem( "user:roles", newRoles );
                 },
                 addRole: function ( newRole )
                 {
                     if( !service.hasRoles( [ newRole ] ) )
                     {
                         roles.push( newRole );
-                        localStorageService.set( "user:roles", roles );
+                        service.storageType.setItem( "user:roles", roles );
                     }
                 },
                 hasRoles: function ( checkRoles )

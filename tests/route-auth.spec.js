@@ -1,13 +1,12 @@
+"use strict";
 
 describe( "RouteAuth Provider", function ()
 {
-    "use strict";
-
     var RouteAuth, $rootScope, $location;
 
     beforeEach( function ()
     {
-        var mockModule = angular.module( "test.vokal.RouteAuth", function () {} );
+        var mockModule = angular.module( "test.vokal.RouteAuth", [] );
         mockModule.config( function ( RouteAuthProvider )
         {
             RouteAuthProvider.setRedirectPath( "/login" );
