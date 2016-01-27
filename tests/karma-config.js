@@ -32,7 +32,7 @@ module.exports = function ( config )
         },
         browserify: {
             debug: true,
-            transform: [ istanbul({}) ]
+            transform: [ istanbul( {} ) ]
         },
         files: [
             "*.spec.js",
