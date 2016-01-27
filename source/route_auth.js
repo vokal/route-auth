@@ -4,8 +4,10 @@ angular.module( "vokal.RouteAuth", [] )
 
 .provider( "RouteAuth", function ()
 {
-    var roles        = null;
+    var roles = null;
     var redirectPath = "/sign-in";
+    var storageMedium = window.localStorage;
+    var storageKey = "routeauth:roles";
 
     this.setRedirectPath = function ( path )
     {
@@ -17,39 +19,40 @@ angular.module( "vokal.RouteAuth", [] )
         function ( $q, $location, $rootScope )
         {
             var service = {
-                storageType: localStorage,
+                swapStorage: function ( newMedium )
+                {
+                    newMedium.setItem( storageKey, service.loadRoles() );
+                    service.storeRoles( [] );
+                    storageMedium = newMedium;
+                },
                 loadRoles: function ()
                 {
-                    roles = service.storageType.getItem( "user:roles" ) || [];
+                    roles = storageMedium.getItem( storageKey ) || [];
                 },
                 storeRoles: function ( newRoles )
                 {
                     roles = newRoles;
-                    service.storageType.setItem( "user:roles", newRoles );
+                    storageMedium.setItem( storageKey, newRoles );
                 },
                 addRole: function ( newRole )
                 {
                     if( !service.hasRoles( [ newRole ] ) )
                     {
                         roles.push( newRole );
-                        service.storageType.setItem( "user:roles", roles );
+                        storageMedium.setItem( storageKey, roles );
                     }
                 },
                 hasRoles: function ( checkRoles )
                 {
-                    var allow = false;
-
                     if( roles === null )
                     {
                         service.loadRoles();
                     }
 
-                    for( var i = 0; allow === false && i < checkRoles.length; i++ )
+                    return checkRoles.some( function ( check )
                     {
-                        allow = roles.indexOf( checkRoles[ i ] ) >= 0;
-                    }
-
-                    return allow;
+                        return roles.indexOf( check ) >= 0;
+                    } );
                 },
                 hasNoRoles: function ()
                 {
