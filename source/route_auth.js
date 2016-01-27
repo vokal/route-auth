@@ -1,55 +1,59 @@
-angular.module( "vokal.RouteAuth", [ "LocalStorageModule" ] )
+"use strict";
+
+angular.module( "vokal.RouteAuth", [] )
 
 .provider( "RouteAuth", function ()
 {
-    "use strict";
-
-    var roles        = null;
+    var roles = null;
     var redirectPath = "/sign-in";
+    var storageMedium = window.localStorage;
+    var storageKey = "routeauth:roles";
 
     this.setRedirectPath = function ( path )
     {
         redirectPath = path;
     };
 
-    this.$get = [ "$q", "$location", "$rootScope", "localStorageService",
+    this.$get = [ "$q", "$location", "$rootScope",
 
-        function ( $q, $location, $rootScope, localStorageService )
+        function ( $q, $location, $rootScope )
         {
             var service = {
-
+                swapStorage: function ( newMedium )
+                {
+                    service.loadRoles();
+                    storageMedium.removeItem( storageKey );
+                    storageMedium = newMedium;
+                    service.storeRoles( roles );
+                },
                 loadRoles: function ()
                 {
-                    roles = localStorageService.get( "user:roles" ) || [];
+                    roles = JSON.parse( storageMedium.getItem( storageKey ) ) || [];
                 },
                 storeRoles: function ( newRoles )
                 {
                     roles = newRoles;
-                    localStorageService.set( "user:roles", newRoles );
+                    storageMedium.setItem( storageKey, JSON.stringify( newRoles ) );
                 },
                 addRole: function ( newRole )
                 {
                     if( !service.hasRoles( [ newRole ] ) )
                     {
                         roles.push( newRole );
-                        localStorageService.set( "user:roles", roles );
+                        storageMedium.setItem( storageKey, JSON.stringify( roles ) );
                     }
                 },
                 hasRoles: function ( checkRoles )
                 {
-                    var allow = false;
-
                     if( roles === null )
                     {
                         service.loadRoles();
                     }
 
-                    for( var i = 0; allow === false && i < checkRoles.length; i++ )
+                    return checkRoles.some( function ( check )
                     {
-                        allow = roles.indexOf( checkRoles[ i ] ) >= 0;
-                    }
-
-                    return allow;
+                        return roles.indexOf( check ) >= 0;
+                    } );
                 },
                 hasNoRoles: function ()
                 {

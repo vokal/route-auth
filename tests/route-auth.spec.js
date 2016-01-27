@@ -1,13 +1,12 @@
+"use strict";
 
 describe( "RouteAuth Provider", function ()
 {
-    "use strict";
-
     var RouteAuth, $rootScope, $location;
 
     beforeEach( function ()
     {
-        var mockModule = angular.module( "test.vokal.RouteAuth", function () {} );
+        var mockModule = angular.module( "test.vokal.RouteAuth", [] );
         mockModule.config( function ( RouteAuthProvider )
         {
             RouteAuthProvider.setRedirectPath( "/login" );
@@ -93,6 +92,17 @@ describe( "RouteAuth Provider", function ()
         $rootScope.$apply();
 
         expect( result ).toBe( true );
+    } );
+
+    it( "should allow swapping the storage medium", function ()
+    {
+        RouteAuth.storeRoles( [ "user" ] );
+        expect( window.localStorage.getItem( "routeauth:roles" ) ).toBe( '["user"]' );
+        expect( window.sessionStorage.getItem( "routeauth:roles" ) ).toBe( null );
+
+        RouteAuth.swapStorage( window.sessionStorage );
+        expect( window.localStorage.getItem( "routeauth:roles" ) ).toBe( null );
+        expect( window.sessionStorage.getItem( "routeauth:roles" ) ).toBe( '["user"]' );
     } );
 
 } );
