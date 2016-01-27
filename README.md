@@ -1,13 +1,15 @@
 #Route Auth
 
-> Easy to use route authorization provider
+> Easy to use route authorization provider for Angular
 
 * [Usage](#section-usage)
 * [Interface](#section-interface)
 
 ## <a name="section-usage"></a>Usage
 
-Include the file found in the `dist` directory.
+`npm install route-auth`
+
+Then use browserify or another packaging tool and `require( "route-auth" )`
 
 When creating your main angular module, include `vokal.RouteAuth` in the list of included modules, e.g.
 ```js
@@ -17,13 +19,14 @@ angular.module( "myApp", [ "vokal.RouteAuth" ] );
 Add a resolve to a route like so:
 
 ```js
-$routeProvider.when( "/edit-account", { templateUrl: partialPath( "edit-account.html" ),
-	resolve: {
-		auth: [ "RouteAuth", function ( RouteAuth )
-		{
-			return RouteAuth.auth( [ "user" ] );
-		} ]
-	}
+$routeProvider.when( "/edit-account", {
+  templateUrl: partialPath( "edit-account.html" ),
+  resolve: {
+    auth: [ "RouteAuth", function ( RouteAuth )
+	{
+ 	  return RouteAuth.auth( [ "user" ] );
+	} ]
+  }
 } );
 ```
 
