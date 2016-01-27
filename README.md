@@ -181,5 +181,6 @@ Migrate roles to a new storage medium. For example, if a user chooses not to hav
 
 * * *
 
-Compatability: IE9+
-License: MIT
+### Compatability: IE9+
+
+### License: MIT
