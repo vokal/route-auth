@@ -15,6 +15,8 @@ angular.module( "myApp", [ "vokal.RouteAuth" ] );
 ```
 
 Add a resolve to a route like so:
+
+```js
 $routeProvider.when( "/edit-account", { templateUrl: partialPath( "edit-account.html" ),
 	resolve: {
 		auth: [ "RouteAuth", function ( RouteAuth )
@@ -23,15 +25,16 @@ $routeProvider.when( "/edit-account", { templateUrl: partialPath( "edit-account.
 		} ]
 	}
 } );
+```
 
 The array of strings passed to RouteAuth.auth are the permissions that are allowable for the route
 
 Somewhere else in your code, such as after authentication, you need to tell RouteAuth what roles the
-current user has, if any. This looks like RouteAuth.storeRoles( [ "role1", "role2", "etc" ] ).
-Roles are stored with local storage, to clear the store just call RouteAuth.storeRoles( [] ).
+current user has, if any. This looks like `RouteAuth.storeRoles( [ "role1", "role2", "etc" ] )`.
+By default roles are stored with local storage. To clear the store call `RouteAuth.storeRoles( [] )`.
 
 Security:
-Because roles are stored in plain text in local storage where they can be directly edited, this
+Because roles are stored in plain text in local or session storage where they can be directly edited, this
 route authorization does not replace in any way authorization on the server side.
 
 ## <a name="section-interface"></a>Interface
@@ -44,6 +47,7 @@ The following methods can be called on the `RouteAuth` service once injected int
 * [hasRoles( checkRoles )](#method-hasRoles)
 * [hasNoRoles()](#method-hasNoRoles)
 * [auth( allowedRoles, options )](#method-auth)
+* [swapStorage( newMedium )](#method-swap-storage)
 
 ### Methods
 
@@ -170,5 +174,12 @@ $routeProvider.when( "/edit-account", { templateUrl: partialPath( "edit-account.
 
 * * *
 
+#### <a name="method-swap-storage"></a>`swapStorage( newMedium )`
+
+Migrate roles to a new storage medium. For example, if a user chooses not to have their session persisted after login you might use `swapStorage( window.sessionStorage )` before or even after the login completes. To use a custom storage location such as cookies, the interface of `newMedium` should expose `setItem()`, `getItem()`, and `removeItem()` methods that work the same was as in the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Storage).
+
+
+* * *
 
 Compatability: IE9+
+License: MIT
