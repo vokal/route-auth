@@ -21,25 +21,26 @@ angular.module( "vokal.RouteAuth", [] )
             var service = {
                 swapStorage: function ( newMedium )
                 {
-                    newMedium.setItem( storageKey, service.loadRoles() );
-                    service.storeRoles( [] );
+                    service.loadRoles();
+                    storageMedium.removeItem( storageKey );
                     storageMedium = newMedium;
+                    service.storeRoles( roles );
                 },
                 loadRoles: function ()
                 {
-                    roles = storageMedium.getItem( storageKey ) || [];
+                    roles = JSON.parse( storageMedium.getItem( storageKey ) ) || [];
                 },
                 storeRoles: function ( newRoles )
                 {
                     roles = newRoles;
-                    storageMedium.setItem( storageKey, newRoles );
+                    storageMedium.setItem( storageKey, JSON.stringify( newRoles ) );
                 },
                 addRole: function ( newRole )
                 {
                     if( !service.hasRoles( [ newRole ] ) )
                     {
                         roles.push( newRole );
-                        storageMedium.setItem( storageKey, roles );
+                        storageMedium.setItem( storageKey, JSON.stringify( roles ) );
                     }
                 },
                 hasRoles: function ( checkRoles )

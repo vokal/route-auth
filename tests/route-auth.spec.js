@@ -94,4 +94,15 @@ describe( "RouteAuth Provider", function ()
         expect( result ).toBe( true );
     } );
 
+    it( "should allow swapping the storage medium", function ()
+    {
+        RouteAuth.storeRoles( [ "user" ] );
+        expect( window.localStorage.getItem( "routeauth:roles" ) ).toBe( '["user"]' );
+        expect( window.sessionStorage.getItem( "routeauth:roles" ) ).toBe( null );
+
+        RouteAuth.swapStorage( window.sessionStorage );
+        expect( window.localStorage.getItem( "routeauth:roles" ) ).toBe( null );
+        expect( window.sessionStorage.getItem( "routeauth:roles" ) ).toBe( '["user"]' );
+    } );
+
 } );
