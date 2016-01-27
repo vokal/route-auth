@@ -1,8 +1,8 @@
 {
   "name": "route-auth",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "source/route_auth.js",
-  "description": "Easy to use route authorization provider",
+  "description": "Easy to use route authorization provider for Angular",
   "repository": {
     "type": "git",
     "url": "https://github.com/vokal/route-auth.git"
